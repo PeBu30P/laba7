@@ -1,0 +1,17 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h2>Добавить статью</h2>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row newpost">
+        <table class="col-md-8">
+            {{ articleForm.as_table }}
+        </table>
+    </div>
+    <button type="submit" class="save btn btn-default vertical-margins">Сохранить статью</button>
+</form>
+
+{% endblock %}

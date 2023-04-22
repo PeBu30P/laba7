@@ -1,0 +1,58 @@
+﻿{% extends 'app/layout.html' %}
+{% block content %}
+{% if form != None %}
+<h2 class="header">{{ title }}</h2>
+<div>
+	<form method="post">
+		{% csrf_token %}
+		<label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+		{{ form.username }}<br><br>
+		<label for="{{ form.gender.id_for_label }}">{{ form.gender.label }}</label>
+		{{ form.gender }}
+		<label for="{{ form.corn.id_for_label }}">{{ form.corn.label }}</label>
+		{{ form.corn }}<br><br>
+		<label for="{{ form.rate.id_for_label }}">{{ form.rate.label }}</label>
+		{{ form.rate }}<br><br>
+		<label for="{{ form.feedback.id_for_label }}">{{ form.feedback.label }}</label>
+		{{ form.feedback }}<br><br>
+		<input id="sbm_btn" type="submit" value="Отправить">
+	</form>
+</div>
+{% else %}
+<h2 class="header">Благодарим за ваш отзыва!</h2>
+<h3>Вот как он выглядит:</h3>
+<ul>
+	<li><span>Имя:</span> {{ data.username }}</li>
+	<li><span>Пол:</span> {{ data.gender }}</li>
+	<li><span>Вы козерог:</span> {{ data.corn }}</li>
+	<li><span>Оценка сайта:</span> {{ data.rate }}</li>
+	<li><span>Отзыв:</span> {{ data.feedback }}</li>
+</ul>
+{% endif %}
+<script>
+		function sbm_btn_activate(){
+			$('#sbm_btn').css('color', 'red')
+		}
+
+		function sbm_btn_deactivate(){
+			$('#sbm_btn').css('color', 'black')
+		}
+
+		function txt_field_activate(){
+			$(this).css('background-color', 'cadetblue')
+		}
+
+		function txt_field_deactivate(){
+			$(this).css('background-color', 'white')
+		}
+
+
+		$('#sbm_btn').mouseout(sbm_btn_deactivate)
+		$('#sbm_btn').mouseover(sbm_btn_activate)
+		$('#id_username').focus(txt_field_activate)
+		$('#id_username').blur(txt_field_deactivate)
+		$('#id_feedback').focus(txt_field_activate)
+		$('#id_feedback').blur(txt_field_deactivate)
+
+</script>
+{% endblock %}

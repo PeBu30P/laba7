@@ -1,0 +1,22 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+
+{% for post in posts %}
+
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>{{ post.title }}</h2>
+        <h4>{{ post.posted }}</h4>
+        <p>{{ post.description }}</p>
+        <p><a class="btn btn-default" href="{% url 'article' parametr=post.id %}">Читать далее</a></p>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}

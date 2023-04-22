@@ -1,0 +1,46 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<p class="vertical-margins"><a class="btn btn-default" href="{% url 'blog' %}">&laquo; Назад</a></p>
+
+<h2>{{ post.title }}</h2>
+
+{% if post.image and post.image.url != "/media/temp.jpg" %}
+<div class="row vertical-margins">
+    <div class="col-md-6 col-md-offset-3">
+        <img src="{{ post.image.url }}" alt="Картинка" class="img-responsive img-rounded" />
+    </div>
+</div>
+{% endif %}
+
+<div class="article-content"><p>{{ post.content|linebreaksbr }}</p></div>
+
+{% if user.is_authenticated %}
+
+<h3>Добавить комментарий</h3>
+
+<form method="post">
+    {% csrf_token %}
+    <div>
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Отправить комментарий</button>
+    </div>
+</form>
+
+{% else %}
+
+<h3>Для добавления своего комментария, пожалуйста, авторизуйтесь</h3>
+
+{% endif %}
+
+{% for comment in comments %}
+
+<hr />
+<h7> {{ comment.date }} </h7>
+<h5 class="comment-author"> {{ comment.author }} </h5>
+<p> {{ comment.text|linebreaksbr }} </p>
+
+{% endfor %}
+
+{% endblock %}
